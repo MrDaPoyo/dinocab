@@ -38,7 +38,7 @@ app.post('/login', async (req, res) => {
     const ipAddress = requestIp.getClientIp(req);
     const userExists = await dbManager.getUserByIP(ipAddress);
     if (!username) {
-        res.status(400).send('Username is required');
+        return res.status(400).send('Username is required');
     }
     if (!userExists) {
         await dbManager.createUser(username, ipAddress);
