@@ -19,6 +19,11 @@ const authMiddleware = async (req, res, next) => {
         }
         return res.redirect('/login');
     }
+    req.user = userExists;
+    res.locals.user = userExists;
+    if (req.path === '/login') {
+        return res.redirect('/');
+    }
     return next();
 }
 
