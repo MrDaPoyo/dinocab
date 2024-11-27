@@ -1,6 +1,7 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
-const requestIp = require('request-ip')
+const requestIp = require('request-ip');
+const fs = require('fs-extra');
 const dbManager = require('./db');
 const app = express();
 const port = 8080;
@@ -30,8 +31,16 @@ const authMiddleware = async (req, res, next) => {
 app.use(cookieParser());
 app.use(authMiddleware);
 
+function readDinos() {
+    var dinos = fs.readFileSync('./dinos.json', 'utf8');
+    dinos = JSON.parse(dinos);
+    return dinos;
+}
+
+var dinos = readDinos();
+
 app.get('/', (req, res) => {
-    res.render('index', { title: 'Home' });
+    res.render('index', { title: 'Home', dinos: dinos });
 });
 
 app.get('/login', (req, res) => {
@@ -53,6 +62,10 @@ app.post('/login', async (req, res) => {
         }
     }
     res.redirect('/');
+});
+
+app.get('/dinos', (req, res) => {
+    res.status(200).json(dinos);
 });
 
 app.get('/cabs', (req, res) => {

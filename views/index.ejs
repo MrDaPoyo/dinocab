@@ -1,3 +1,17 @@
 <%- include('header') %>
-<h1>DinoCab!</h1>
+<h2>DinoCabs near your area!</h2>
+<ul>
+    <% Object.keys(dinos.dinos).forEach(function(key) { %>
+        <li>
+            <h3><%= dinos.dinos[key].name %></h3>
+            <p>Age: <%= dinos.dinos[key].age %></p>
+            <p>Gender: <%= dinos.dinos[key].gender %></p>
+            <p>Married: <%= dinos.dinos[key].married ? 'Yes' : 'No' %></p>
+            <p>Car Model: <%= dinos.dinos[key].car.model %></p>
+            <p>Car Fabrication Date: <%= dinos.dinos[key].car.fabrication_date %></p>
+            <img src="/cars/<%= dinos.dinos[key].car.picture %>" width="300px" alt="<%= dinos.dinos[key].car.model %>">
+            <p>Slogan: <%= dinos.dinos[key].slogan %></p>
+        </li>
+    <% }); %>
+</ul>
 <%- include('footer') %>
