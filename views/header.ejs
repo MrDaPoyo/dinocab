@@ -13,9 +13,14 @@
 <body>
     <div class="navbar">
         <h2>DinoCab!</h2>
-        <div class="right">
-            <a href="/">Home</a>
-            <a href="/cabs">DinoCabs Near You</a>
+        <div class="column-container right">
+            <% if (typeof user !== 'undefined' && user) { %>
+                <span style="margin-inline-start: auto;"><%= user.username %></span>
+            <% } %>
+            <div class="row-container">
+                <a href="/">Home</a>
+                <a href="/cabs">DinoCabs Near You</a>
+            </div>
         </div>
     </div>
     <div class="main">

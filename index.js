@@ -46,7 +46,11 @@ app.post('/login', async (req, res) => {
         return res.status(400).send('Username is required');
     }
     if (!userExists) {
-        await dbManager.createUser(username, ipAddress);
+        try {
+            await dbManager.createUser(username, ipAddress);
+        } catch (err) {
+            return res.redirect('/?message=Username taken');
+        }
     }
     res.redirect('/');
 });
