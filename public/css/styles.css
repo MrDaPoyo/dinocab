@@ -11,6 +11,10 @@ body {
     justify-content: center;
 }
 
+.space-between {
+    justify-content: space-between;
+}
+
 .column-container {
     display: flex;
     flex-direction: column;
@@ -46,4 +50,33 @@ body {
 .main {
     padding: 15px;
     height: 100%;
+}
+
+.dinoCabList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.dinoCabList li {
+    list-style-type: none;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 2px 2px 5px #ccc;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.dinoCabList li * {
+    margin: 0;
+}
+
+.dinoCabList li img {
+    border-radius: 5px;
+    height: 12.5vh;
 }

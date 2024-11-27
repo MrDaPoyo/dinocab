@@ -1,16 +1,21 @@
 <%- include('header') %>
 <h2>DinoCabs near your area!</h2>
-<ul>
+<ul class="dinoCabList">
     <% Object.keys(dinos.dinos).forEach(function(key) { %>
-        <li>
-            <h3><%= dinos.dinos[key].name %></h3>
-            <p>Age: <%= dinos.dinos[key].age %></p>
-            <p>Gender: <%= dinos.dinos[key].gender %></p>
-            <p>Married: <%= dinos.dinos[key].married ? 'Yes' : 'No' %></p>
-            <p>Car Model: <%= dinos.dinos[key].car.model %></p>
-            <p>Car Fabrication Date: <%= dinos.dinos[key].car.fabrication_date %></p>
-            <img src="/cars/<%= dinos.dinos[key].car.picture %>" width="300px" alt="<%= dinos.dinos[key].car.model %>">
-            <p>Slogan: <%= dinos.dinos[key].slogan %></p>
+        <li width="100%">
+            <div class="column-container" width="100%">
+                <div class="row-container space-between" width="100%">
+                    <div class="column-container">
+                        <h3><%= dinos.dinos[key].name %> - <%= dinos.dinos[key].gender.charAt(0).toUpperCase() %> <%= dinos.dinos[key].age %></h3>
+                        <p>DinoMarried? <%= dinos.dinos[key].married ? 'Yes' : 'No' %></p>
+                        <p>Car Model: <%= dinos.dinos[key].car.model %></p>
+                        <p>Car Fabrication Date: <%= dinos.dinos[key].car.fabrication_date %></p>
+                    </div>
+                    <span style="margin-inline: auto;"></span>
+                    <img src="/cars/<%= dinos.dinos[key].car.picture %>" alt="<%= dinos.dinos[key].car.model %>"><br>
+                </div>
+                <strong><%= dinos.dinos[key].slogan %></strong>
+            </div>
         </li>
     <% }); %>
 </ul>
