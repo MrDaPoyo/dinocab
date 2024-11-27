@@ -18,7 +18,7 @@ const authMiddleware = async (req, res, next) => {
         }
         return res.redirect('/login');
     }
-    next();
+    return next();
 }
 
 app.use(cookieParser());
