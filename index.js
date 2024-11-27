@@ -1,5 +1,6 @@
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const requestIp = require('request-ip')
 const dbManager = require('./db');
 const app = express();
 const port = 8080;
@@ -11,7 +12,7 @@ app.use(express.json());
 app.set('views', './views');
 
 const authMiddleware = async (req, res, next) => {
-    const userExists = await dbManager.getUserByIP(req.ip); // Assume checkUserExists is a function that checks if the user exists
+    const userExists = await dbManager.getUserByIP(requestIp.getClientIp(req)); // Assume checkUserExists is a function that checks if the user exists
     if (!userExists) {
         if (req.path === '/login') {
             return next();
@@ -34,7 +35,7 @@ app.get('/login', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const username = req.body.username;
-    const ipAddress = req.ip;
+    const ipAddress = requestIp.getClientIp(req);
     const userExists = await dbManager.getUserByIP(ipAddress);
     if (!username) {
         res.status(400).send('Username is required');
